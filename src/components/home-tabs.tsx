@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
 import { useMemo, useState } from "react";
+import { ProductStage } from "@/components/product-stage";
 
 type Lane = "jobseeker" | "recruiter";
 
@@ -152,93 +154,118 @@ export function HomeTabs() {
   const [lane, setLane] = useState<Lane>("jobseeker");
 
   return (
-    <section className="space-y-5">
+    <section className="space-y-6">
       <div className="ag-card rounded-3xl p-2">
-        <div className="grid grid-cols-2 gap-2">
+        <div className="relative grid grid-cols-2 gap-2">
+          <motion.span
+            layout
+            transition={{ type: "spring", stiffness: 420, damping: 34 }}
+            className={[
+              "absolute top-1 bottom-1 w-[calc(50%-0.25rem)] rounded-2xl bg-white",
+              lane === "jobseeker" ? "left-1" : "left-[calc(50%+0.25rem)]",
+            ].join(" ")}
+          />
+
           <button
             type="button"
             onClick={() => setLane("jobseeker")}
             className={[
-              "rounded-2xl px-4 py-3 text-sm font-semibold transition",
+              "relative z-10 rounded-2xl px-4 py-3 text-sm font-semibold transition",
               lane === "jobseeker"
-                ? "bg-white text-black"
-                : "bg-transparent text-white/75 hover:bg-white/5 hover:text-white",
+                ? "text-black"
+                : "text-white/75 hover:bg-white/5 hover:text-white",
             ].join(" ")}
           >
-            Login as Job Seeker
+            Job Seeker
           </button>
           <button
             type="button"
             onClick={() => setLane("recruiter")}
             className={[
-              "rounded-2xl px-4 py-3 text-sm font-semibold transition",
+              "relative z-10 rounded-2xl px-4 py-3 text-sm font-semibold transition",
               lane === "recruiter"
-                ? "bg-white text-black"
-                : "bg-transparent text-white/75 hover:bg-white/5 hover:text-white",
+                ? "text-black"
+                : "text-white/75 hover:bg-white/5 hover:text-white",
             ].join(" ")}
           >
-            Login as Recruiter
+            Recruiter
           </button>
         </div>
       </div>
 
-      {lane === "jobseeker" ? (
-        <div className="ag-card rounded-3xl p-6">
-          <div className="space-y-2">
-            <div className="text-xs uppercase tracking-[0.2em] text-white/55">
-              Job seeker
+      <AnimatePresence mode="wait" initial={false}>
+        {lane === "jobseeker" ? (
+          <motion.div
+            key="jobseeker-cta"
+            initial={{ opacity: 0, y: 10, filter: "blur(6px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            exit={{ opacity: 0, y: -6, filter: "blur(6px)" }}
+            transition={{ duration: 0.55, ease: [0.21, 0.61, 0.35, 1] }}
+            className="ag-card rounded-3xl p-6"
+          >
+            <div className="space-y-2">
+              <div className="text-xs uppercase tracking-[0.2em] text-white/55">
+                Job seeker
+              </div>
+              <h2 className="text-2xl font-semibold tracking-tight">
+                Download the app. Hunt smarter.
+              </h2>
+              <p className="text-sm leading-6 text-white/70">
+                Install-first experience with match scoring, saved jobs, and cover
+                letter drafts.
+              </p>
             </div>
-            <h2 className="text-2xl font-semibold tracking-tight">
-              Download the app. Hunt smarter.
-            </h2>
-            <p className="text-sm leading-6 text-white/70">
-              Install on mobile to get the best experience—match scoring, saved
-              jobs, and faster applications.
-            </p>
-          </div>
 
-          <div className="mt-5 flex flex-wrap items-center gap-3">
-            <StoreButtons />
-            <Link
-              href="/jobseeker"
-              className="text-sm font-semibold text-white/80 underline decoration-white/20 underline-offset-4 hover:text-white"
-            >
-              Continue on web
-            </Link>
-          </div>
-        </div>
-      ) : (
-        <div className="ag-card rounded-3xl p-6">
-          <div className="space-y-2">
-            <div className="text-xs uppercase tracking-[0.2em] text-white/55">
-              Recruiter
+            <div className="mt-5 flex flex-wrap items-center gap-3">
+              <StoreButtons />
+              <Link
+                href="/jobseeker"
+                className="text-sm font-semibold text-white/80 underline decoration-white/20 underline-offset-4 hover:text-white"
+              >
+                Continue on web
+              </Link>
             </div>
-            <h2 className="text-2xl font-semibold tracking-tight">
-              Paste a JD. Get ranked candidates.
-            </h2>
-            <p className="text-sm leading-6 text-white/70">
-              Privacy-first by default—profiles are masked until you choose to
-              reveal contact.
-            </p>
-          </div>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="recruiter-cta"
+            initial={{ opacity: 0, y: 10, filter: "blur(6px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            exit={{ opacity: 0, y: -6, filter: "blur(6px)" }}
+            transition={{ duration: 0.55, ease: [0.21, 0.61, 0.35, 1] }}
+            className="ag-card rounded-3xl p-6"
+          >
+            <div className="space-y-2">
+              <div className="text-xs uppercase tracking-[0.2em] text-white/55">
+                Recruiter
+              </div>
+              <h2 className="text-2xl font-semibold tracking-tight">
+                Paste a JD. Get ranked candidates.
+              </h2>
+              <p className="text-sm leading-6 text-white/70">
+                Masked by default. Reveal contact only when you’re ready.
+              </p>
+            </div>
 
-          <div className="mt-5 flex flex-wrap items-center gap-3">
-            <Link
-              href="/recruiter"
-              className="inline-flex items-center justify-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-black transition hover:bg-white/90"
-            >
-              Go to recruiter portal
-            </Link>
-            <Link
-              href="/privacy"
-              className="text-sm font-semibold text-white/80 underline decoration-white/20 underline-offset-4 hover:text-white"
-            >
-              Read privacy
-            </Link>
-          </div>
-        </div>
-      )}
+            <div className="mt-5 flex flex-wrap items-center gap-3">
+              <Link
+                href="/recruiter"
+                className="inline-flex items-center justify-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-black transition hover:bg-white/90"
+              >
+                Go to recruiter portal
+              </Link>
+              <Link
+                href="/privacy"
+                className="text-sm font-semibold text-white/80 underline decoration-white/20 underline-offset-4 hover:text-white"
+              >
+                Read privacy
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
+      <ProductStage lane={lane} />
       <HowItWorksGraphic lane={lane} />
     </section>
   );

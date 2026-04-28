@@ -1,5 +1,14 @@
 import { AppScreenshots } from "@/components/app-screenshots";
 import { HomeTabs } from "@/components/home-tabs";
+import {
+  Comparison,
+  FAQ,
+  FeatureGrid,
+  FinalCTA,
+  PainPoints,
+  StatsStrip,
+  Testimonials,
+} from "@/components/home-enhancements";
 import { Reveal } from "@/components/reveal";
 
 export default function Home() {
@@ -59,6 +68,7 @@ export default function Home() {
         </div>
       </section>
 
+      <StatsStrip />
       <AppScreenshots />
 
       <section className="mx-auto max-w-6xl px-5 pb-16 sm:pb-24">
@@ -90,6 +100,13 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <PainPoints />
+      <FeatureGrid />
+      <Testimonials />
+      <Comparison />
+      <FAQ />
+      <FinalCTA />
     </div>
   );
 }

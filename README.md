@@ -31,6 +31,16 @@ Open `http://127.0.0.1:3050`.
   - `src/components/home-tabs.tsx`
   - `src/app/jobseeker/page.tsx`
 
+## App screenshot placeholders (homepage)
+
+The homepage renders animated phone frames using files in:
+
+- `public/app/placeholder-jobswipe-splash.png`
+- `public/app/placeholder-preferences.png`
+- `public/app/placeholder-resume-upload.png`
+
+Replace those files (same filenames) whenever you have updated marketing screenshots.
+
 ## Deploy
 
 Works well on Vercel, Netlify, or any Node host that supports Next.js.

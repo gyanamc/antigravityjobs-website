@@ -1,3 +1,4 @@
+import { AppScreenshots } from "@/components/app-screenshots";
 import { HomeTabs } from "@/components/home-tabs";
 import { Reveal } from "@/components/reveal";
 
@@ -57,6 +58,8 @@ export default function Home() {
           </Reveal>
         </div>
       </section>
+
+      <AppScreenshots />
 
       <section className="mx-auto max-w-6xl px-5 pb-16 sm:pb-24">
         <div className="grid gap-6 lg:grid-cols-3">

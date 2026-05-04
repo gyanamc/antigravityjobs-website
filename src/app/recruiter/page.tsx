@@ -28,7 +28,9 @@ export default function RecruiterPage() {
 
             <div className="flex flex-wrap items-center gap-3">
               <a
-                href="#"
+                href="https://recruiter.antigravityjobs.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-white/90"
               >
                 Login / Get started
